@@ -1,5 +1,4 @@
-
-const map = new Array(50);
+let map = new Array(50);
 for (let i = 0; i < map.length; i++) {
   map[i] = new Array(50).fill(false);
 }
@@ -12,6 +11,7 @@ function createSVGRectangle(width, height, x, y) {
   rectangle.setAttribute("x", x);
   rectangle.setAttribute("y", y);
   rectangle.setAttribute("stroke", "black");
+  rectangle.setAttribute("id", `${x/20}:${y/20}`)
   if(map[x/20][y/20] == true) {
     rectangle.setAttribute("fill", "white"); // Couleur initiale du rectangle
   } else {
@@ -77,6 +77,68 @@ function createRectangleOfSize(n) {
   document.body.appendChild(rectangleContainer); // Ajout du rectangle à la page HTML
 }
 
+var open = [];
+
 function test() {
-  console.log(map)
+  open = [];
+  let point = new Point(0, 0);
+    generateGraph(point); 
+    console.log(point)
+
+}
+
+function generateGraph(point) {
+  const neighbours = [
+    [point.x, point.y - 1],
+    [point.x, point.y + 1],
+    [point.x - 1, point.y],
+    [point.x + 1, point.y],
+  ]; 
+
+oamain_svg.js
+
+
+open.push(:NvCh   
+point)
+  changeColorOfOpen(point.x, point.y);
+  for(const [x, y] of neighbours) {
+    let currentElement = open.filter(a => a.x == x && a.y == y)[0];
+    if(currentElement) {
+        point.neighbour.push(currentElement);
+    }else if(
+      !open.includes(`${x}:${y}`)
+      && x >= 0
+      && y >= 0
+      && x < map.length 
+      && y < map[x].length 
+      && map[x][y] == true 
+    ) {
+      point.neighbour.push(generateGraph(new Point(x, y)));
+    }  
+  }
+  return point;
+}
+
+function changeColorOfOpen(x, y) {
+  document.getElementById(`${x}:${y}`).setAttribute("fill", "blue"); 
+}
+
+function exportArray() {
+    console.log(JSON.stringify(map))
+}
+
+function importArray() {
+  const value = document. querySelector('input').value
+  map = JSON.parse(value);
+}
+
+class Point {
+  x;
+  y;  
+  neighbour = [];
+
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 }
