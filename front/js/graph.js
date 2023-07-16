@@ -35,7 +35,9 @@ function generateGraph(point) {
       && y < map[x].length 
       && map[x][y] == true 
     ) {
-      point.neighbour.push(generateGraph(new Point(x, y)));
+      setTimeout(() => {
+        point.neighbour.push(generateGraph(new Point(x, y)));
+      }, 250);
     }  
   }
   return point;

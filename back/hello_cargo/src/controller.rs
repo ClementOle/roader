@@ -1,4 +1,4 @@
-use actix_web::{get, HttpResponse};
+use actix_web::{get, HttpResponse, post};
 
 #[get("/hello-world")]
 pub async fn hello_world() -> HttpResponse {
@@ -6,3 +6,5 @@ pub async fn hello_world() -> HttpResponse {
         .content_type("plain/text")
         .body("Hello World !")
 }
+
+
